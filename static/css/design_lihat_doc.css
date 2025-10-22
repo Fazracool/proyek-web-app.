@@ -1,0 +1,1083 @@
+/* Font and Root Variables */
+/* Dihapus: @import url('https://fonts.googleapis.com/css2?family=Georgia&display=swap'); */
+
+:root {
+  font-size: clamp(14px, 1.2vw, 16px);
+  --primary-color: #34495e;
+  --secondary-color: #34495e;
+  --text-color: #333;
+  --bg-light: #ffffff;
+  --bg-main: #f4f7f6;
+  --bg-grey: #f9f9f9;
+  --border-color: #ddd;
+  --error-color: #d9534f;
+  --success-color: #5cb85c;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --modal-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.2);
+  --transition-speed: 0.3s;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* PERUBAHAN: Mengganti font dari 'Georgia' menjadi font sans-serif standar */
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+html,
+body {
+  min-height: 100vh;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  color: var(--text-color);
+  background-color: var(--bg-main);
+}
+
+/* Top Bar */
+.top-bar {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.3125rem 3.125rem;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+}
+.top-bar .address {
+  display: flex;
+  align-items: center;
+}
+.top-bar .address i {
+  margin-right: 0.5rem;
+}
+
+/* Navbar */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+}
+.navbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.625rem 3.125rem;
+  background: var(--bg-light);
+  position: relative;
+}
+.logo {
+  display: flex;
+  align-items: center;
+}
+.logo img {
+  height: 2.5rem;
+  width: 2.5rem;
+  margin-right: 0.625rem;
+  border-radius: 30%;
+  object-fit: cover;
+}
+.logo span {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--text-color);
+}
+
+/* Hamburger Menu Icon */
+.hamburger {
+  display: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+/* Menu */
+.nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+.nav-links li {
+  margin-left: 1.875rem;
+  position: relative;
+}
+
+/* === Konsisten untuk link & dropdown === */
+.nav-links a,
+.dropdown .dropbtn {
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding-bottom: 0.3125rem;
+  position: relative;
+  transition: color var(--transition-speed) ease;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* underline animasi */
+.nav-links a::after,
+.dropdown .dropbtn::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0.125rem;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--secondary-color);
+  transition: width var(--transition-speed) ease;
+}
+
+.nav-links a:hover,
+.dropdown .dropbtn:hover {
+  color: var(--secondary-color);
+}
+
+.nav-links a:hover::after,
+.dropdown .dropbtn:hover::after {
+  width: 100%;
+}
+
+/* Dropdown */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #f9f9f9;
+  min-width: 8rem;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 0.25rem;
+  padding: 0.625rem 0;
+  margin-top: 0.3125rem;
+}
+.dropdown-content a {
+  color: black;
+  padding: 0.625rem 0.9375rem;
+  text-decoration: none;
+  display: block;
+  font-size: 0.875rem;
+}
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+  color: var(--secondary-color);
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Content Area */
+.content-area {
+  flex-grow: 1;
+  width: 100%;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  padding: 0 !important; /* dihapus padding-nya */
+  margin: 0 !important;
+  box-sizing: border-box;
+  max-width: 100% !important; /* biar mentok kanan kiri */
+}
+
+.document-list {
+  background: #ffffff;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 0.5rem 0 !important; /* spasi tipis biar gak nempel navbar */
+  margin: 0 !important;
+  box-sizing: border-box;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+.document-list h2 {
+  margin: 0;
+  padding: 1rem;
+  border-bottom: 2px solid var(--primary-color);
+  background-color: #fff;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.document-list ul {
+  list-style: none;
+}
+/* Gaya asli untuk li */
+.document-list li {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color var(--transition-speed);
+}
+.document-list li:hover {
+  background-color: #f8f9fa;
+}
+.document-list li:last-child {
+  border-bottom: none;
+}
+.document-list .file-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.document-list .file-info i {
+  display: none;
+}
+.document-list .file-meta {
+  display: none;
+}
+.document-list .file-actions button {
+  background: none;
+  border: 1px solid var(--border-color);
+  color: var(--primary-color);
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+}
+.document-list .file-actions button:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Gaya Tambahan dari Inline Style untuk List Dokumen */
+.document-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.file-info {
+  /* PERUBAHAN: Baris ini membuat posisi waktu di kanan selalu lurus */
+  flex-grow: 1;
+}
+.file-info .file-link {
+  text-decoration: none;
+  color: #333;
+  transition: color 0.2s;
+}
+.file-info .file-link:hover {
+  color: #0056b3;
+}
+.file-upload-time {
+  font-size: 0.9em;
+  color: #555;
+  white-space: nowrap;
+  margin-left: 15px;
+}
+/* Akhir Gaya Tambahan */
+
+/* Footer */
+.footer {
+  height: 0.5rem;
+  background: var(--primary-color);
+  flex-shrink: 0;
+}
+
+/* General Modal Styles */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-speed) ease,
+    visibility 0s var(--transition-speed);
+}
+.overlay.visible {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+/* Logout Modal (Tetap Sama) */
+.modal {
+  background: var(--bg-light);
+  padding: 0.9rem;
+  border-radius: 0.375rem;
+  text-align: center;
+  width: 20%;
+  max-width: 22rem;
+  color: var(--text-color);
+  transform: scale(0.9);
+  font-weight: 400; /* tipis (normal) */
+  font-size: 0.85rem; /* kecilin font */
+  transition: transform var(--transition-speed) ease;
+}
+
+.overlay.visible .modal {
+  transform: scale(1);
+}
+.modal h2 {
+  margin-bottom: 0.9375rem;
+  font-size: 1rem; /* lebih kecil dari sebelumnya */
+  font-weight: 400; /* tipis (normal), bukan bold */
+}
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.modal button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color var(--transition-speed),
+    color var(--transition-speed);
+}
+.cancel-btn {
+  background-color: #eee;
+  color: #333;
+}
+.cancel-btn:hover {
+  background-color: #ddd;
+}
+.confirm-btn {
+  background-color: var(--error-color);
+  color: white;
+}
+.confirm-btn:hover {
+  background-color: #c9302c;
+}
+
+/* 🔧 Upload Modal (Mengikuti design_home_desa.css) */
+.upload-modal {
+  background: var(--bg-light);
+  border-radius: 0.75rem;
+  width: 90%;
+  max-width: 450px; /* Disesuaikan dengan design_home_desa.css */
+  text-align: left;
+  box-shadow: var(--modal-shadow);
+  transform: scale(0.9);
+  transition: transform var(--transition-speed) ease;
+}
+.overlay.visible .upload-modal {
+  transform: scale(1);
+}
+.upload-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  /* 🔧 Style header baru */
+  background-color: var(--primary-color);
+  color: white;
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+  border-bottom: none; /* Hapus border bottom lama */
+}
+.upload-modal-header h2 {
+  font-size: 1.25rem;
+  margin: 0;
+  color: white; /* 🔧 Warna font header baru */
+}
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.75rem;
+  cursor: pointer;
+  color: white; /* 🔧 Warna tombol close baru */
+  opacity: 0.8;
+}
+.close-btn:hover {
+  opacity: 1;
+}
+.upload-modal-body {
+  padding: 1.5rem;
+}
+.form-group {
+  margin-bottom: 1rem; /* 🔧 Disesuaikan */
+}
+.form-group label {
+  display: block;
+  margin-bottom: 0.4rem; /* 🔧 Disesuaikan */
+  font-weight: 600;
+  font-size: 0.9rem; /* 🔧 Disesuaikan */
+  color: var(--secondary-color); /* 🔧 Disesuaikan */
+}
+.form-group select,
+.form-group input {
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 0.3rem; /* 🔧 Disesuaikan */
+  border: 1px solid var(--border-color);
+  font-size: 1rem;
+}
+/* 🔧 Drop Zone Baru */
+.drop-zone {
+  border: 2px dashed var(--primary-color);
+  border-radius: 0.5rem;
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color var(--transition-speed),
+    border-color var(--transition-speed);
+}
+.drop-zone.drag-over {
+  background-color: #eef7ff;
+  border-color: var(--success-color);
+}
+.drop-zone.disabled {
+  border-color: #e0e0e0;
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+/* 🔧 Browse Button Baru */
+.browse-btn {
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.25rem;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background-color var(--transition-speed);
+  font-weight: 600;
+}
+.browse-btn:hover {
+  background-color: var(--primary-color);
+}
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+/* 🔧 File Preview Baru */
+.file-preview-container {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  display: none; /* Default hidden */
+}
+.file-preview-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-grey);
+  padding: 0.75rem;
+  border-radius: 0.3rem;
+}
+.file-details {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: 80%;
+  overflow: hidden;
+}
+.file-details i {
+  color: var(--primary-color);
+}
+.file-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500;
+}
+.remove-file-btn {
+  background: none;
+  border: none;
+  color: var(--error-color);
+  font-size: 1.1rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+/* 🔧 Error Message Baru */
+.error-message {
+  color: var(--error-color);
+  background-color: #fef1f1;
+  border: 1px solid #f0d8d8;
+  padding: 0.75rem;
+  border-radius: 0.3rem;
+  margin-top: 1rem;
+  display: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* 🔧 Upload Button Baru */
+.upload-btn {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  transition: background-color var(--transition-speed);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem; /* 🔧 Disesuaikan */
+}
+.upload-btn:hover {
+  background-color: var(--secondary-color); /* 🔧 Disesuaikan */
+}
+.upload-btn:disabled {
+  background-color: #a9a9a9;
+  cursor: not-allowed;
+}
+
+/* 📱 Mobile (≤768px) */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+  .content-area {
+    padding: 1rem;
+  }
+  .document-list {
+    padding: 1rem;
+    min-height: auto;
+  }
+  .document-list h2 {
+    font-size: 1.1rem;
+  }
+  .document-list li {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.75rem;
+    gap: 0.5rem;
+  }
+  .document-list .file-actions {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .document-list .file-actions button {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
+  }
+}
+
+/* 💻 Desktop biasa (≥1025px) */
+@media (min-width: 1025px) {
+  .content-area {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+/* 💻 Desktop lebar (≥1440px) */
+@media (min-width: 1440px) {
+  .content-area {
+    max-width: 1400px;
+  }
+  .document-list h2 {
+    font-size: 1.4rem;
+  }
+  .document-list li {
+    padding: 1.25rem;
+  }
+}
+
+/* 🖥️ Monitor 2K (≥2560px) */
+@media (min-width: 2560px) {
+  .content-area {
+    max-width: 1800px;
+  }
+  .document-list h2 {
+    font-size: 1.6rem;
+  }
+  .document-list li {
+    padding: 1.5rem;
+  }
+  .document-list .file-actions button {
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* 🖥️ Monitor 4K (≥3840px) */
+@media (min-width: 3840px) {
+  .content-area {
+    max-width: 2400px;
+  }
+  .document-list h2 {
+    font-size: 1.9rem;
+  }
+  .document-list li {
+    padding: 1.75rem;
+  }
+  .document-list .file-actions button {
+    font-size: 1.1rem;
+    padding: 0.6rem 1.2rem;
+  }
+}
+
+/* 🖥️ Monitor 8K (≥7680px) */
+@media (min-width: 7680px) {
+  .content-area {
+    max-width: 3200px;
+  }
+  .document-list h2 {
+    font-size: 2.4rem;
+  }
+  .document-list li {
+    padding: 2rem;
+  }
+  .document-list .file-actions button {
+    font-size: 1.3rem;
+    padding: 0.8rem 1.4rem;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: -100%;
+    width: 100%;
+    flex-direction: column;
+    background-color: var(--bg-light);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    transition: left var(--transition-speed) ease-in-out;
+    padding: 1rem 0;
+  }
+  .nav-links.active {
+    left: 0;
+  }
+  .nav-links li {
+    margin: 1rem 0;
+    text-align: center;
+    width: 100%;
+  }
+  .dropdown-content {
+    position: static;
+    display: none;
+    box-shadow: none;
+    background-color: #f1f1f1;
+    width: 100%;
+    border-radius: 0;
+  }
+  .dropdown:hover .dropdown-content {
+    display: none;
+  }
+  .dropdown.active .dropdown-content {
+    display: block;
+  }
+  .dropdown .dropbtn {
+    justify-content: center;
+  }
+  .navbar,
+  .top-bar {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  .top-bar {
+    font-size: 0.65rem;
+    text-align: center;
+  }
+  .top-bar .address {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+/* 🔧 === ANIMASI LOADING DAN NOTIFIKASI (Mengikuti design_home_desa.css) === */
+.loading-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7); /* 🔧 Disesuaikan */
+  color: white;
+  font-family: Arial, sans-serif;
+  z-index: 3000;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.loading-overlay.show {
+  display: flex;
+}
+
+.loading-spinner {
+  border: 5px solid rgba(255, 255, 255, 0.2);
+  border-top: 5px solid #00ff88;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.notification {
+  position: fixed;
+  top: 25px;
+  right: -300px;
+  background-color: #333;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  font-weight: 500;
+  z-index: 3100;
+  transition: right 0.6s ease;
+}
+
+.notification.success {
+  background-color: var(--success-color); /* 🔧 Disesuaikan */
+}
+
+.notification.error {
+  background-color: var(--error-color); /* 🔧 Disesuaikan */
+}
+
+.notification.show {
+  right: 30px;
+}
+/* 🔧 === ANIMASI DELAY / PROGRESS BAR (Baru) === */
+.progress-animation {
+  position: relative;
+  width: 80%;
+  max-width: 300px;
+  height: 10px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  margin-top: 15px;
+}
+
+.progress-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #00ff88, #00aaff);
+  border-radius: 5px;
+  animation: progressMove 2.2s ease-in-out forwards;
+}
+
+@keyframes progressMove {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* 🔹 Status Icon Style */
+.status-icon {
+  display: inline-block;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  padding: 0.3rem 0.7rem;
+  font-weight: bold;
+}
+
+.status-disetujui {
+  background-color: #d4edda;
+}
+
+.status-ditolak {
+  background-color: #f8d7da;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background: #ffffff;
+  overflow-x: hidden !important;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1 0 auto;
+  margin-top: 0 !important;
+  padding-top: 0.3rem !important; /* dikit biar gak nempel banget */
+}
+
+.footer {
+  flex-shrink: 0;
+}
+
+/* =============================== */
+/* 🔹 LIST DOKUMEN TANPA TABEL     */
+/* =============================== */
+.file-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.file-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 1.2rem;
+  border-bottom: 1px solid #eaeaea;
+  transition: background-color 0.2s ease;
+}
+
+.file-list li:hover {
+  background-color: #fafafa;
+}
+
+.file-number {
+  font-weight: 600;
+  color: #444;
+  margin-right: 0.5rem;
+  min-width: 2rem;
+}
+
+.file-name {
+  flex-grow: 1;
+  color: #222;
+  font-weight: 500;
+  word-break: break-word;
+}
+
+.file-status {
+  font-size: 1rem;
+  margin-left: 1rem;
+}
+
+/* 🔹 Warna Ikon Status */
+.status-icon {
+  font-size: 1.1rem;
+  background: none;
+}
+
+.status-menunggu {
+  color: #d1a100;
+}
+
+.status-disetujui {
+  color: #2e7d32;
+  background: none;
+}
+
+.status-ditolak {
+  color: #c62828;
+  background: none;
+}
+.verify-buttons {
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  display: flex;
+  gap: 10px;
+  z-index: 999;
+}
+
+.btn-approve,
+.btn-reject,
+.btn-download {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  color: white;
+}
+
+.btn-approve {
+  background-color: #28a745;
+}
+.btn-reject {
+  background-color: #dc3545;
+}
+.btn-download {
+  background-color: #007bff;
+}
+
+.btn-approve:hover {
+  background-color: #218838;
+}
+.btn-reject:hover {
+  background-color: #c82333;
+}
+.btn-download:hover {
+  background-color: #0069d9;
+}
+
+/* =============================== */
+/* 🔹 DESAIN POP-UP REVISI BARU    */
+/* =============================== */
+
+/* Kotak putih pop-up utama */
+.revisi-modal-content {
+  background-color: #ffffff;
+  padding: 1.25rem; /* 20px */
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  max-width: 500px;
+  animation: fadeIn 0.3s ease-in-out;
+  transform: scale(0.95);
+  transition: transform 0.3s ease;
+}
+
+/* Animasi saat modal terlihat */
+.overlay.visible .revisi-modal-content {
+  transform: scale(1);
+}
+
+/* Header Pop-up (Judul dan Tombol Close) */
+.revisi-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eeeeee;
+  padding-bottom: 0.75rem; /* 12px */
+  margin-bottom: 1rem; /* 16px */
+}
+
+.revisi-modal-header h3 {
+  margin: 0;
+  font-size: 1.125rem; /* 18px */
+  font-weight: 600;
+  color: #333;
+}
+
+/* Tombol Close (X) */
+.revisi-modal-close {
+  background: none;
+  border: none;
+  font-size: 1.75rem; /* 28px */
+  font-weight: bold;
+  line-height: 1;
+  color: #aaaaaa;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.revisi-modal-close:hover {
+  color: #000000;
+}
+
+/* Isi pesan di dalam pop-up */
+.revisi-modal-body p {
+  margin: 0;
+  font-size: 1rem; /* 16px */
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Animasi saat pop-up muncul */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 🔧 === BARU: Style Step Indicator (dari design_home_desa.css) === */
+.step-indicator {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  padding: 0.5rem 0;
+  position: relative;
+}
+/* Garis penghubung */
+.step-indicator::before {
+  content: "";
+  position: absolute;
+  top: 1.1rem;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background-color: #ddd;
+  z-index: 1;
+}
+.step {
+  flex-grow: 1;
+  text-align: center;
+  position: relative;
+  color: #888;
+  padding-bottom: 0.5rem;
+  transition: color var(--transition-speed);
+}
+.step-number {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: #ddd;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  position: relative;
+  z-index: 2;
+  border: 3px solid var(--bg-light);
+  transition: background-color var(--transition-speed);
+}
+.step.active .step-number {
+  background-color: var(--success-color);
+}
+.step-title {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+.step.active {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+/* 🔧 === BARU: Style Summary Desa (dari design_home_desa.css) === */
+.desa-name-display {
+    padding: 0.6rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.3rem;
+    background-color: var(--bg-grey);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--primary-color);
+}

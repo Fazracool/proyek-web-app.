@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>PMK Website - Unggah Dokumen</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/design_home_desa.css') }}"
+    />
+  </head>
+  <body>
+    <div class="top-bar">
+      <div class="address">
+        <i class="fas fa-home"></i>
+        <span>Alamat: Jl. Licin No. 12, Licin Banyuwangi, Kec. Licin</span>
+      </div>
+    </div>
+
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          <img
+            src="{{ url_for('static', filename='img/logo.jpg') }}"
+            alt="Logo PMK"
+          />
+          <span
+            >Pemerintahan <br />
+            Kecamatan Licin</span
+          >
+        </div>
+        <div class="hamburger">
+          <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links">
+          <li><a href="{{ url_for('home_desa') }}">Beranda</a></li>
+
+          <li class="dropdown">
+            <a href="#" class="dropbtn"
+              >Unggah Dokumen <i class="fas fa-caret-down"></i
+            ></a>
+            <div class="dropdown-content">
+              <a href="#" data-doc-type="rkpdes" class="open-upload-modal-btn"
+                >RKPDes</a
+              >
+              <a href="#" data-doc-type="bangdes" class="open-upload-modal-btn"
+                >Musrenbangdes</a
+              >
+            </div>
+          </li>
+
+          <li class="dropdown">
+            <a href="#" class="dropbtn"
+              >Daftar Unggahan <i class="fas fa-caret-down"></i
+            ></a>
+            <div class="dropdown-content">
+              <a href="{{ url_for('lihat_dokumen', category='rkpdes') }}"
+                >RKPDes</a
+              >
+              <a href="{{ url_for('lihat_dokumen', category='bangdes') }}"
+                >Musrenbangdes</a
+              >
+            </div>
+          </li>
+
+          <li role="none">
+            <a role="menuitem" href="#" id="logoutBtn">Logout</a>
+          </li>
+          </ul>
+      </nav>
+    </header>
+
+    <main class="main-content">
+      <section class="hero">
+        <div class="hero-content">
+          <h1>Selamat Datang di Halaman Desa</h1>
+          <p>Unggah dan kelola dokumen desa Anda di sini</p>
+        </div>
+      </section>
+    </main>
+
+    <footer></footer>
+
+    <div class="overlay" id="logoutOverlay" hidden>
+      <div class="modal" role="dialog" aria-modal="true">
+        <h2>Yakin mau logout?</h2>
+        <div class="modal-actions">
+          <button class="cancel-btn" id="cancelLogoutBtn">Batal</button>
+          <button class="confirm-btn" id="confirmLogoutBtn">Logout</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="overlay" id="uploadOverlay">
+      <div
+        id="uploadModal"
+        class="upload-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="uploadModalTitle"
+      >
+        <header class="upload-modal-header">
+          <h2 id="uploadModalTitle">Unggah Dokumen</h2>
+          <button
+            id="closeUploadModalBtn"
+            class="close-btn"
+            aria-label="Tutup Modal"
+          >
+            &times;
+          </button>
+        </header>
+        <div class="upload-modal-body">
+          <div class="step-indicator" id="rkpdesStepIndicator">
+            <div class="step active" data-step="1">
+              <span class="step-number">1</span>
+              <span class="step-title">Pilih Desa</span>
+            </div>
+            <div class="step" data-step="2">
+              <span class="step-number">2</span>
+              <span class="step-title">Validasi Bulan</span>
+            </div>
+            <div class="step" data-step="3">
+              <span class="step-number">3</span>
+              <span class="step-title">Unggah File</span>
+            </div>
+            <div class="step" data-step="4">
+              <span class="step-number">4</span>
+              <span class="step-title">Proses Unggah</span>
+            </div>
+          </div>
+          <form id="uploadForm" enctype="multipart/form-data" novalidate>
+            <div class="form-group" id="desaGroup">
+              <label for="desaSelect">Pilih Desa:</label>
+              <select id="desaSelect" name="desa" required>
+                <option value="" disabled selected>-- Pilih Desa --</option>
+                <option value="Banjar">Banjar</option>
+                <option value="Gumuk">Gumuk</option>
+                <option value="Jelun">Jelun</option>
+                <option value="Kluncing">Kluncing</option>
+                <option value="Licin">Licin</option>
+                <option value="Pakel">Pakel</option>
+                <option value="Segobang">Segobang</option>
+                <option value="Tamansari">Tamansari</option>
+              </select>
+            </div>
+
+            <div id="desaSummary" class="form-group" style="display: none">
+              <label>Desa Terpilih:</label>
+              <p id="selectedDesaName" class="desa-name-display">Nama Desa</p>
+            </div>
+
+            <div
+              id="errorMessage"
+              class="error-message"
+              role="alert"
+              style="display: none"
+            ></div>
+
+            <div class="form-group" id="fileGroup" style="display: none">
+              <label>File Dokumen:</label>
+              <div id="dropZone" class="drop-zone">
+                <input
+                  type="file"
+                  id="fileInput"
+                  name="file"
+                  class="visually-hidden"
+                />
+                <p>Seret & lepas file di sini, atau</p>
+                <button type="button" id="browseBtn" class="browse-btn">
+                  Pilih File
+                </button>
+              </div>
+            </div>
+
+            <div
+              id="file-preview-container"
+              class="file-preview-container"
+              style="display: none"
+            ></div>
+
+            <button
+              type="submit"
+              id="uploadBtn"
+              class="upload-btn"
+              disabled
+              style="display: none"
+            >
+              <i class="fas fa-upload"></i> Unggah
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="loading-overlay" id="loadingOverlay"></div>
+
+    <div class="notification success" id="notifSuccess">
+      ✅ Dokumen berhasil diunggah!
+    </div>
+    <div class="notification error" id="notifError">
+      ❌ Gagal mengunggah dokumen.
+    </div>
+
+    <script src="{{ url_for('static', filename='js/js_home_desa.js') }}"></script>
+  </body>
+</html>
